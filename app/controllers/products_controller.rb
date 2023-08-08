@@ -1,9 +1,15 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
   # GET /products or /products.json
   def index
     @products = Product.all
+
+    respond_to do |format|
+      format.html # By default, render the HTML view
+      format.json { render json: @products } # Respond with JSON data for JSON requests
+    end
   end
 
   # GET /products/1 or /products/1.json
