@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\controllers",
     "\\app\\views",
     "\\app\\views\\products",
-    "\\db"
+    "\\config"
   ],
+  "SelectedNode": "\\config\\routes.rb",
   "PreviewInSolutionExplorer": false
 }
