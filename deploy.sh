@@ -1,16 +1,16 @@
-CURRENT_INSTANCE=$( sudo docker ps -a -q --filter ancestor="$IMAGE_NAME" --format"{{.ID}}")
+#!/bin/bash
 
-if ["$CURRENT_INSTANCE"]
-then 
-  sudo docker rm $(sudo docker stop $CURRENT_INSTANCE)
-fi
+# Stop and remove existing process if running
+pm2 stop $CONTAINER_NAME
+pm2 delete $CONTAINER_NAME
 
-sudo docker pull $IMAGE_NAME
+# Pull latest code from repository
+cd ~/FarmersMarket
+git pull origin main
 
-CONTAINER_EXISTS=$(sudo docker ps -a | grep $CONTANER_NAME)
-if ["$CONTAINER_EXISTS"]
-then 
-	sudo docker rm $CONTAINER_NAME
-fi
+# Install dependencies
+bundle install
+yarn install
 
-sudo docker run -p 3000:3000 -d --name $CONTAINER_NAME $IMAGE_NAME
+# Start application using pm2
+SECRET_KEY_BASE=$SECRET_KEY_BASE RAILS_ENV=production pm2 start --name $CONTAINER_NAME -- bundle exec rails server -p 3000
