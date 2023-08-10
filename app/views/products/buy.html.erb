@@ -3,6 +3,38 @@
 <head>
   <meta charset="utf-8">
   <title>Products HTML Client</title>
+  /* Adding styling in the HTML client because there are already enough files in this app */
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #products {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .product:last-child {
+      border: none;
+    }
+  </style>
 </head>
 <body onLoad="loadData()">
 
@@ -12,7 +44,7 @@
 
 <script>
   async function loadData() {
-    var url = "http://localhost:4000/products";
+    var url = "http://54.174.115.213:3000/products";
     try {
       var response = await fetch(url, {
         headers: {
@@ -28,7 +60,7 @@
       var div = '';
 
       for (var i = 0; i < data.length; i++) { 
-        div += data[i].name + ' ' + data[i].description + ' ' + data[i].price + "<br /><br />";
+        div += '<div class="product">' + data[i].name + '<br />' + data[i].description + '<br />' + data[i].price + '</div>';
       }
 
       document.getElementById("products").innerHTML = div;

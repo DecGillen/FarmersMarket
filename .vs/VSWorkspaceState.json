@@ -2,11 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\assets",
+    "\\app\\assets\\config",
     "\\app\\controllers",
+    "\\app\\models",
     "\\app\\views",
-    "\\app\\views\\products",
-    "\\config"
+    "\\bin",
+    "\\config",
+    "\\config\\initializers",
+    "\\db"
   ],
-  "SelectedNode": "\\config\\routes.rb",
+  "SelectedNode": "\\.circleci\\config.yml",
   "PreviewInSolutionExplorer": false
 }
