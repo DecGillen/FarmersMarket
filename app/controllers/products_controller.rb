@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   #load the html client I created for the 'read' CRUD operation
-  def buy
+  def read
   end
 
   # GET /products/1 or /products/1.json
