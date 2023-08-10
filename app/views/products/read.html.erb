@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Products HTML Client</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #products {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .product:last-child {
+      border: none;
+    }
+  </style>
+</head>
+<body onLoad="loadData()">
+
+<h2>Products Client</h2>
+
+<div id="products"></div>
+
+<script>
+  async function loadData() {
+    var url = "http://54.174.115.213:3000/products";
+    try {
+      var response = await fetch(url, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      var data = await response.json();
+      var div = '';
+
+      for (var i = 0; i < data.length; i++) { 
+        div += '<div class="product">' + data[i].name + '<br />' + data[i].description + '<br />' + data[i].price + '</div>';
+      }
+
+      document.getElementById("products").innerHTML = div;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+</script>
+</body>
+</html>
